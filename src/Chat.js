@@ -11,17 +11,19 @@ export default class App extends React.Component {
     state={
         messages:[],
     }
+     Backendobj= new Backend()
   render() {
+    // console.log('user rendered',this.state.messages)
     return (
          <GiftedChat
          messages={this.state.messages}
-         onSend={(message)=>{Backend.sendMessage(message)}}
-         user={{_id:Backend.getUid(),name:this.props.name}}
+         onSend={(message)=>{this.Backendobj.sendMessage(message)}}
+         user={{_id:this.Backendobj.getUid(),name:this.props.name2}}
          />
     );
   }
   componentDidMount(){
-    Backend.loadMessages((message)=>{
+    this.Backendobj.loadMessages((message)=>{
         this.setState((previousState)=>{
             return{
                 messages:GiftedChat.append(previousState.messages,message)
@@ -30,6 +32,6 @@ export default class App extends React.Component {
     })
   }
   componentWillUnmount() {
-    Backend.closeChat();
+    this.Backendobj.closeChat();
   }
 }

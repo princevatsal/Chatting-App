@@ -22,7 +22,8 @@ import {
 
 export default class Home extends React.Component {
   state = {
-    name: '',
+    name2: '',
+    aaaaa:'love'
   };
   render(){
     return(
@@ -35,15 +36,18 @@ export default class Home extends React.Component {
         style={styles.textInput}
         onChangeText={(text)=>{
           this.setState({
-            name:text
+            name2:text,
+            aaaaa:'sove'
           })
         }}
         value={this.state.name}
         />
         <TouchableOpacity 
         onPress={()=>{
+          console.log('username',this.state)
           Actions.chat({
-            name:this.state.name
+            name2:this.state.name2,
+            llllllllll:this.state.aaaaa
           })
         }}>
           <Text style={styles.label}>Next</Text>

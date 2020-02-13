@@ -5,11 +5,11 @@ class Backend{
     constructor(){
         console.log('constructor caled')
         if(!firebase.apps.length)
-            firebase.initializeApp(firebaseConfig)
+            {firebase.initializeApp(firebaseConfig)}
         firebase.auth().onAuthStateChanged((user)=>{
             if(user){
                 this.setUid(user.uid)
-                console.log('login sucess ',user.uid)
+                console.log('login  sucess ',user.uid)
             }
             else{
                 firebase.auth().signInAnonymously()
@@ -31,12 +31,13 @@ loadMessages(callback){
     this.messageRef.off()
     const onRecieve=(data)=>{
         const message=data.val();
+        console.log('message from firebase',message)
         callback({
             _id:data.key,
             text:message.text,
             createdAt:new Date(message.createdAt),
             user:{
-                _id:message.user_id,
+                _id:message.user._id,
                 name:message.user.name
             }
         })
@@ -69,4 +70,4 @@ var firebaseConfig = {
     appId: "1:617937314915:web:1aa3ce4936774b58acc456",
     measurementId: "G-NX8N65R38M"
   };
-export default new Backend()
+export default Backend
